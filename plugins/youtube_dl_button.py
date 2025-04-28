@@ -23,10 +23,12 @@ async def youtube_dl_call_back(bot, update):
     except Exception:
         await update.message.delete(True)
         return
+
     youtube_dl_url = update.message.reply_to_message.text
     custom_file_name = str(response_json.get("title"))[:50] + "_" + youtube_dl_format
     youtube_dl_username = None
     youtube_dl_password = None
+    
     if "|" in youtube_dl_url:
         url_parts = youtube_dl_url.split("|")
         if len(url_parts) == 2:
@@ -126,6 +128,14 @@ async def youtube_dl_call_back(bot, update):
     await update.message.edit(text=Translation.UPLOAD_START)
     try:
         start_time = time.time()
+
+        # चेक करें कि reply_to_message मौजूद है या नहीं
+        if update.message.reply_to_message:
+            reply_to_message_id = update.message.reply_to_message.message_id
+        else:
+            reply_to_message_id = None  # या डिफॉल्ट मान
+
+        # अब reply_to_message_id का उपयोग करें
         if tg_send_type == "audio":
             duration = await Mdata03(file_location)
             thumbnail = await Gthumb01(bot, update)
@@ -136,7 +146,7 @@ async def youtube_dl_call_back(bot, update):
             parse_mode="HTML",
             duration=duration,
             thumb=thumbnail,
-            reply_to_message_id=update.message.reply_to_message.message_id,
+            reply_to_message_id=reply_to_message_id,
             progress=progress_for_pyrogram,
             progress_args=(Translation.UPLOAD_START, update.message, start_time))
         elif tg_send_type == "file":
@@ -146,11 +156,7 @@ async def youtube_dl_call_back(bot, update):
             thumb=thumbnail,
             caption=description,
             parse_mode="HTML",
-            if update.message.reply_to_message:
-    reply_to_message_id = update.message.reply_to_message.message_id
-else:
-    reply_to_message_id = None  # या कोई डिफॉल्ट मान, या उपयोगकर्ता को सूचित करें
-    ,
+            reply_to_message_id=reply_to_message_id,
             progress=progress_for_pyrogram,
             progress_args=(Translation.UPLOAD_START, update.message, start_time))
         elif tg_send_type == "vm":
@@ -160,8 +166,8 @@ else:
             video_note=file_location,
             duration=duration,
             length=width,
-            thumb=thumb_image_path,
-            reply_to_message_id=update.message.reply_to_message.message_id,
+            thumb=thumbnail,
+            reply_to_message_id=reply_to_message_id,
             progress=progress_for_pyrogram,
             progress_args=(Translation.UPLOAD_START, update.message, start_time))
         elif tg_send_type == "video":
@@ -176,7 +182,7 @@ else:
             height=height,
             thumb=thumbnail,
             supports_streaming=True,
-            reply_to_message_id=update.message.reply_to_message.message_id,
+            reply_to_message_id=reply_to_message_id,
             progress=progress_for_pyrogram,
             progress_args=(Translation.UPLOAD_START,
             update.message, start_time) )
@@ -187,7 +193,7 @@ else:
             thumb=thumbnail,
             caption=description,
             parse_mode="HTML",
-            reply_to_message_id=update.message.reply_to_message.message_id,
+            reply_to_message_id=reply_to_message_id,
             progress=progress_for_pyrogram,
             progress_args=(Translation.UPLOAD_START, update.message, start_time))
 
