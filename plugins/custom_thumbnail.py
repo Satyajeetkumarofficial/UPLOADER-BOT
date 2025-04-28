@@ -17,13 +17,13 @@ from helper_funcs.help_Nekmo_ffmpeg import take_screen_shot
 async def save_photo(bot, update):
     await AddUser(bot, update)
     await clinton.set_thumbnail(update.from_user.id, thumbnail=update.photo.file_id)
-    await bot.send_message(chat_id=update.chat.id, text=Translation.SAVED_CUSTOM_THUMB_NAIL, reply_to_message_id=update.message_id)
+    await bot.send_message(chat_id=update.chat.id, text=Translation.SAVED_CUSTOM_THUMB_NAIL, reply_to_message_id=update.id)
 
 @Clinton.on_message(filters.private & filters.command("delthumbnail"))
 async def delthumbnail(bot, update):
     await AddUser(bot, update)
     await clinton.set_thumbnail(update.from_user.id, thumbnail=None)
-    await bot.send_message(chat_id=update.chat.id, text=Translation.DEL_ETED_CUSTOM_THUMB_NAIL, reply_to_message_id=update.message_id)
+    await bot.send_message(chat_id=update.chat.id, text=Translation.DEL_ETED_CUSTOM_THUMB_NAIL, reply_to_message_id=update.id)
 
 @Clinton.on_message(filters.private & filters.command("viewthumbnail") )
 async def viewthumbnail(bot, update):
@@ -34,7 +34,7 @@ async def viewthumbnail(bot, update):
         chat_id=update.chat.id,
         photo=thumbnail,
         caption=f"Your current saved thumbnail 🦠",
-        reply_to_message_id=update.message_id)
+        reply_to_message_id=update.id)
     else:
         await update.reply_text(text=f"No Thumbnail found 🤒")
 
