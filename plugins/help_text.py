@@ -45,13 +45,10 @@ async def start(bot, update):
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton(
-                        "Source code ⚡", url="https://github.com/Clinton-Abraham/UPLOADER-BOT"
-                    ),
-                    InlineKeyboardButton("Project Channel 👨🏻‍💻", url="https://t.me/Space_X_bots"),
+                    InlineKeyboardButton("Project Channel 👨🏻‍💻", url="https://t.me/ProBotUpdate"),
                 ],
-                [InlineKeyboardButton("Developer 👨‍⚖️", url="https://t.me/clinton_abraham")],
+                [InlineKeyboardButton("Developer 👨‍⚖️", url="https://t.me/Satyajeetkumarofficial")],
             ]
         ),
-        reply_to_message_id=update.message_id
+        reply_to_message_id=message_id
     )
