@@ -12,3 +12,4 @@ motor[srv]
 beautifulsoup4
 pyrogram==2.0.106
 ntplib
+flask
