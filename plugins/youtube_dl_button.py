@@ -146,7 +146,10 @@ async def youtube_dl_call_back(bot, update):
             thumb=thumbnail,
             caption=description,
             parse_mode="HTML",
-            reply_to_message_id=update.message.reply_to_message.message_id,
+            if update.message.reply_to_message:
+    reply_to_message_id = update.message.reply_to_message.message_id
+else:
+    reply_to_message_id = None  # या कोई डिफॉल्ट मान, या उपयोगकर्ता को सूचित करें,
             progress=progress_for_pyrogram,
             progress_args=(Translation.UPLOAD_START, update.message, start_time))
         elif tg_send_type == "vm":
