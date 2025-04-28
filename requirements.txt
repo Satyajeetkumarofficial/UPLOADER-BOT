@@ -10,5 +10,5 @@ aiofiles
 dnspython
 motor[srv]
 beautifulsoup4
-pyrogram==1.4.16
+pyrogram==2.0.106
 ntplib
