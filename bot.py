@@ -2,16 +2,6 @@
 # -*- coding: utf-8 -*-
 # (c) Shrimadhav U K | Modifieded By : @DC4_WARRIOR
 
-import ntplib
-from time import ctime, sleep
-try:
-    client = ntplib.NTPClient()
-    response = client.request('pool.ntp.org')
-    print("[INFO] System time synchronized: ", ctime(response.tx_time))
-except Exception as e:
-    print("[WARN] Failed to sync time: ", e)
-sleep(1)
-
 from flask import Flask
 import threading
 
