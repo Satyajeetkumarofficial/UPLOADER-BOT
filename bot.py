@@ -12,6 +12,21 @@ except Exception as e:
     print("[WARN] Failed to sync time: ", e)
 sleep(1)
 
+from flask import Flask
+import threading
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Bot is Running!"
+
+def run():
+    app.run(host="0.0.0.0", port=8080)
+
+# Flask server अलग Thread में चलेगा
+threading.Thread(target=run).start()
+
 import os
 import logging
 from config import Config
