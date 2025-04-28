@@ -2,6 +2,7 @@
 # (c) @AbirHasan2005 | Modifieded By : @DC4_WARRIOR
 
 
+from pyrogram.enums import ParseMode
 from pyrogram import Client as Clinton
 from pyrogram import filters
 from config import Config
@@ -19,4 +20,4 @@ async def sts(c, m):
 async def serc(bot, update):
 
       await bot.send_message(chat_id=update.chat.id, text="🔍 TORRENT SEARCH", 
-      parse_mode="html", reply_markup=Button.BUTTONS01)
+      parse_mode=ParseMode.HTML, reply_markup=Button.BUTTONS01)
