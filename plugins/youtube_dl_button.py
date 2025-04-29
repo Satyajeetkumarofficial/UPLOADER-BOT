@@ -113,12 +113,12 @@ async def youtube_dl_call_back(bot, update):
     t_response = stdout.decode().strip()
     if e_response:
         await bot.edit_message_text(chat_id=update.message.chat.id,
-        message_id=update.message.message_id, text="ERROR : Download failed ⚠️")
+        message_id=update.message.id, text="ERROR : Download failed ⚠️")
         return
     if not t_response:
         asyncio.create_task(clendir(tmp_directory_for_each_user))
         await bot.edit_message_text(chat_id=update.message.chat.id,
-        text="ERROR : File not found 😑", message_id=update.message.message_id)
+        text="ERROR : File not found 😑", message_id=update.message.id)
         return
     file_size, file_location = await get_flocation(download_directory, youtube_dl_ext)
     if file_size == 0:
@@ -202,12 +202,12 @@ async def youtube_dl_call_back(bot, update):
         await bot.edit_message_text(
         text="Uploaded sucessfully ✓\n\nJOIN : @SPACE_X_BOTS",
         chat_id=update.message.chat.id,
-        message_id=update.message.message_id,
+        message_id=update.message.id,
         disable_web_page_preview=True)
     except Exception as e:
         asyncio.create_task(clendir(download_directory))
         await bot.edit_message_text(text=Translation.ERROR.format(e),
-        chat_id=update.message.chat.id, message_id=update.message.message_id)
+        chat_id=update.message.chat.id, message_id=update.message.id)
 
 #=================================
 
